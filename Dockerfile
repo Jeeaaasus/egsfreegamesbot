@@ -5,7 +5,7 @@ COPY requirements.txt /
 RUN \
 apk update && apk upgrade && \
 apk add --no-cache \
-    tzdata
+    tzdata \
     bash && \
 python3 -m pip install -r ./requirements.txt && \
 rm -rf \
