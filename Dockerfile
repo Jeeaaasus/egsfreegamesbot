@@ -15,4 +15,4 @@ rm -rf \
 
 COPY egsfreegamesbot.py /
 
-CMD ["python3 egsfreegamesbot.py"]
+CMD ["python3 /egsfreegamesbot.py"]
