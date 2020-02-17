@@ -5,6 +5,8 @@ COPY requirements.txt /
 RUN \
 apk update && apk upgrade && \
 apk add --no-cache \
+    chromium \
+    chromium-chromedriver \
     tzdata \
     bash && \
 python3 -m pip install -r ./requirements.txt && \
