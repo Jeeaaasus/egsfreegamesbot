@@ -65,23 +65,18 @@ class bot:
     def login_check(self):
         try:
             self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span')
-            print(f'Login done.')
+            print(f'Login success.')
         except NoSuchElementException:
             print(f'Error: login failed.')
             print(f'Exiting!')
             self.driver.close()
             quit()
 
-    def goto_free_games_page(self):
-        # go to the 'free games' page
-        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
-        sleep(10)
-
     def find_free_games(self):
         print(f'Finding free games..')
         # get number of 'Free Now' buttons
         free_now_buttons = len(self.driver.find_elements_by_xpath("//*[text()='Free Now']"))
-        print(f'Found \'{free_now_buttons}\' free game(s)')
+        print(f'Found \'{free_now_buttons}\' free game(s).')
         # for each button
         for n in range(free_now_buttons):
             # click button
@@ -92,7 +87,7 @@ class bot:
                 # make sure the game isn't already owned
                 try:
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
-                    print(f'#{1+n}: You already own that game.')
+                    print(f'#{1+n}: You already own this game.')
                     sleep(10)
                     break
                 except NoSuchElementException:
@@ -115,13 +110,6 @@ class bot:
         # click on 'Place Order'
         self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
 
-    def close_popup_maturewarning(self):
-        # click 'continue' on mature warning
-        self.driver.find_element_by_xpath("//*[text()='Continue']").click()
-
-    def close_popup_cookies(self):
-        self.driver.find_element_by_xpath("//*[text()='Close']").click()
-
     def page_load(self):
         if self.page_load_test() is False:
             print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
@@ -142,6 +130,18 @@ class bot:
             return True
         except Exception:
             return False
+
+    def goto_free_games_page(self):
+        # go to the 'free games' page
+        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
+        sleep(10)
+
+    def close_popup_cookies(self):
+        self.driver.find_element_by_xpath("//*[text()='Close']").click()
+
+    def close_popup_maturewarning(self):
+        # click 'continue' on mature warning
+        self.driver.find_element_by_xpath("//*[text()='Continue']").click()
 
 
 start = bot()
