@@ -24,6 +24,10 @@ class bot:
         print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
         print(f'------------------------------------------------------')
         print(f'Starting egsfreegamesbot')
+        if egs_username == 'unset'
+            print(f'Error: you need to set ENVs \'egs_username\' and \'egs_password\'')
+            self.driver.close()
+            quit()
         print(f'Login: \'{egs_username}\'')
         print(f'...')
         print(f'')
@@ -43,6 +47,7 @@ class bot:
         self.close_popup_cookies()
         print(f'Finding free games..')
         self.find_free_games()
+        print(f'All done, quiting.')
         self.driver.close()
         quit()
 
@@ -78,16 +83,16 @@ class bot:
             while True:
                 # make sure the game isn't already owned
                 try:
-                    print(f'#{n}: {self.driver.current_url}')
+                    print(f'#{1+n}: {self.driver.current_url}')
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
-                    print(f'#{n}: Already own that game.')
+                    print(f'#{1+n}: Already own that game.')
                     sleep(10)
                     break
                 except NoSuchElementException:
                     # get the free game
                     try:
                         self.claim_game()
-                        print(f'#{n}: Claimed!')
+                        print(f'#{1+n}: Claimed!')
                         sleep(10)
                         break
                     # handle mature warning popup
