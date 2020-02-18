@@ -26,7 +26,7 @@ class bot:
         self.goto_free_games_page()
         self.close_popup_cookies()
         self.find_free_games()
-        
+
         print(f'All done! Exiting.')
         self.driver.close()
         quit()
@@ -82,19 +82,19 @@ class bot:
             # click button
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
             sleep(10)
-            print(f'#{1+n}: {self.driver.current_url}')
+            print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
                 try:
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
-                    print(f'#{1+n}: You already own this game.')
+                    print(f'#{1 + n}: You already own this game.')
                     sleep(10)
                     break
                 except NoSuchElementException:
                     # get the free game
                     try:
                         self.claim_game()
-                        print(f'#{1+n}: Claimed!')
+                        print(f'#{1 + n}: Claimed!')
                         sleep(10)
                         break
                     # handle mature warning popup
