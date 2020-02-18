@@ -18,4 +18,4 @@ RUN apk update && apk upgrade && \
 
 COPY egsfreegamesbot.py /
 
-CMD ["'python3' '-u' '/egsfreegamesbot.py'"]
+CMD ["python3", "-u", "/egsfreegamesbot.py"]
