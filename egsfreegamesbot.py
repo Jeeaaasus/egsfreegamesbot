@@ -64,7 +64,7 @@ class bot:
 
     def login_check(self):
         try:
-            self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span')
+            self.driver.find_element_by_xpath("//*[text()='Sorry the credentials you are using are invalid.']")
             print(f'Error: login failed.')
             print(f'Exiting!')
             self.driver.close()
