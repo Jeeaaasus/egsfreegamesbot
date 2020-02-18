@@ -18,6 +18,15 @@ class bot:
         self.driver = webdriver.Chrome(options=options)
 
     def main(self):
+        print(f'------------------------------------------------------')
+        print(f'Made by Jeeaaasus')
+        print(f'https://github.com/Jeeaaasus/egsfreegamesbot')
+        print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
+        print(f'------------------------------------------------------')
+        print(f'Starting egsfreegamesbot')
+        print(f'Using login: {egs_username}')
+        print(f'...')
+        print(f'')
         self.goto_free_games_page()
         if self.page_load() is False:
             print(f'You are probably being rate limited or Epic Games could be experiencing issues..')
