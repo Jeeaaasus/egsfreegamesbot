@@ -1,5 +1,7 @@
 FROM python:3-alpine
 
+ENV egs_username="unset"
+
 COPY requirements.txt /
 
 RUN \
