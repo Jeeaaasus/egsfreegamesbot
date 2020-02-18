@@ -9,13 +9,13 @@ egs_password = environ['egs_password']
 
 class bot:
     def __init__(self):
-        options = webdriver.Options()
+        options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         options.add_argument('--whitelisted-ips')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-extensions')
         options.add_argument('--disable-dev-shm-usage')
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(options=options)
 
     def main(self):
         self.goto_free_games_page()
