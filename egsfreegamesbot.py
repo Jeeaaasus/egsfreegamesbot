@@ -18,11 +18,26 @@ class bot:
         self.driver = webdriver.Chrome(options=options)
 
     def main(self):
+        self.startup()
+        self.goto_free_games_page()
+        self.page_load()
+        self.login()
+        self.login_check()
+        self.goto_free_games_page()
+        self.close_popup_cookies()
+        self.find_free_games()
+        
+        print(f'All done! Exiting.')
+        self.driver.close()
+        quit()
+
+    def startup(self):
         print(f'------------------------------------------------------')
         print(f'Made By: Jeeaaasus')
         print(f'https://github.com/Jeeaaasus/egsfreegamesbot')
         print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
         print(f'------------------------------------------------------')
+        print(f'')
         print(f'Starting egsfreegamesbot')
         if egs_username == 'unset':
             print(f'Error: you need to set ENVs \'egs_username\' and \'egs_password\'')
@@ -30,28 +45,9 @@ class bot:
             quit()
         print(f'Login: \'{egs_username}\'')
         print(f'...')
-        print(f'')
-        self.goto_free_games_page()
-        if self.page_load() is False:
-            print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
-            print(f'Trying again in an hour...')
-            sleep(60 * 60)
-            if self.page_load() is False:
-                print(f'You are probably being rate limited or Epic Games could be experiencing issues..')
-                print(f'Exiting!')
-                self.driver.close()
-                quit()
-        self.login()
-        print(f'Login done.')
-        self.goto_free_games_page()
-        self.close_popup_cookies()
-        print(f'Finding free games..')
-        self.find_free_games()
-        print(f'All done, quiting.')
-        self.driver.close()
-        quit()
 
     def login(self):
+        print(f'Logging in..')
         # go to the store page
         self.driver.get('https://www.epicgames.com/store/en-US')
         sleep(10)
@@ -66,12 +62,23 @@ class bot:
         self.driver.find_element_by_xpath('/html/body/div/div/div/div/div/div[2]/div/form/div[4]/button/span').click()
         sleep(10)
 
+        def login_check(self):
+        try:
+            self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span')
+            print(f'Login done.')
+        except NoSuchElementException:
+            print(f'Error: login failed.')
+            print(f'Exiting!')
+            self.driver.close()
+            quit()
+
     def goto_free_games_page(self):
         # go to the 'free games' page
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
         sleep(10)
 
     def find_free_games(self):
+        print(f'Finding free games..')
         # get number of 'Free Now' buttons
         free_now_buttons = len(self.driver.find_elements_by_xpath("//*[text()='Free Now']"))
         print(f'Found \'{free_now_buttons}\' free game(s)')
@@ -80,12 +87,12 @@ class bot:
             # click button
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
             sleep(10)
+            print(f'#{1+n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
                 try:
-                    print(f'#{1+n}: {self.driver.current_url}')
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
-                    print(f'#{1+n}: Already own that game.')
+                    print(f'#{1+n}: You already own that game.')
                     sleep(10)
                     break
                 except NoSuchElementException:
@@ -116,6 +123,17 @@ class bot:
         self.driver.find_element_by_xpath("//*[text()='Close']").click()
 
     def page_load(self):
+        if self.page_load_test() is False:
+            print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
+            print(f'Trying again in an hour..')
+            sleep(60 * 60)
+            if self.page_load_test() is False:
+                print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
+                print(f'Exiting!')
+                self.driver.close()
+                quit()
+
+    def page_load_test(self):
         # make sure page loads correctly
         try:
             self.driver.find_element_by_xpath("//*[text()='Uh oh, something went wrong.']")
