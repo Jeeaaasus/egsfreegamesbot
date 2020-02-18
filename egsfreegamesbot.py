@@ -19,7 +19,7 @@ class bot:
 
     def main(self):
         print(f'------------------------------------------------------')
-        print(f'Made by Jeeaaasus')
+        print(f'Made By: Jeeaaasus')
         print(f'https://github.com/Jeeaaasus/egsfreegamesbot')
         print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
         print(f'------------------------------------------------------')
