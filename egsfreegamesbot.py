@@ -63,14 +63,14 @@ class bot:
         sleep(10)
 
         def login_check(self):
-        try:
-            self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span')
-            print(f'Login done.')
-        except NoSuchElementException:
-            print(f'Error: login failed.')
-            print(f'Exiting!')
-            self.driver.close()
-            quit()
+            try:
+                self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span')
+                print(f'Login done.')
+            except NoSuchElementException:
+                print(f'Error: login failed.')
+                print(f'Exiting!')
+                self.driver.close()
+                quit()
 
     def goto_free_games_page(self):
         # go to the 'free games' page
