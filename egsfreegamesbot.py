@@ -24,7 +24,7 @@ class bot:
         print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
         print(f'------------------------------------------------------')
         print(f'Starting egsfreegamesbot')
-        if egs_username == 'unset'
+        if egs_username == 'unset':
             print(f'Error: you need to set ENVs \'egs_username\' and \'egs_password\'')
             self.driver.close()
             quit()
