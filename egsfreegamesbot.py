@@ -29,13 +29,19 @@ class bot:
         print(f'')
         self.goto_free_games_page()
         if self.page_load() is False:
-            print(f'You are probably being rate limited or Epic Games could be experiencing issues..')
-            sleep(60 * 10)
-            self.driver.close()
-            quit()
+            print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
+            print(f'Trying again in an hour...')
+            sleep(60 * 60)
+            if self.page_load() is False:
+                print(f'You are probably being rate limited or Epic Games could be experiencing issues..')
+                print(f'Exiting!')
+                self.driver.close()
+                quit()
         self.login()
+        print(f'Login done.')
         self.goto_free_games_page()
         self.close_popup_cookies()
+        print(f'Finding free games..')
         self.find_free_games()
         self.driver.close()
         quit()
@@ -63,6 +69,7 @@ class bot:
     def find_free_games(self):
         # get number of 'Free Now' buttons
         free_now_buttons = len(self.driver.find_elements_by_xpath("//*[text()='Free Now']"))
+        print(f'Found \'{free_now_buttons}\' free game(s)')
         # for each button
         for n in range(free_now_buttons):
             # click button
@@ -71,13 +78,16 @@ class bot:
             while True:
                 # make sure the game isn't already owned
                 try:
+                    print(f'#{n}: {self.driver.current_url}')
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
+                    print(f'#{n}: Already own that game.')
                     sleep(10)
                     break
                 except NoSuchElementException:
                     # get the free game
                     try:
                         self.claim_game()
+                        print(f'#{n}: Claimed!')
                         sleep(10)
                         break
                     # handle mature warning popup
