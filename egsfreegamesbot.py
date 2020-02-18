@@ -24,7 +24,7 @@ class bot:
         print(f'https://hub.docker.com/r/jeeaaasustest/egsfreegamesbot')
         print(f'------------------------------------------------------')
         print(f'Starting egsfreegamesbot')
-        print(f'Using login: {egs_username}')
+        print(f'Using login: \'{egs_username}\'')
         print(f'...')
         print(f'')
         self.goto_free_games_page()
