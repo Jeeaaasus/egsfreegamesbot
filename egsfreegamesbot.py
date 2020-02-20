@@ -53,7 +53,7 @@ class bot:
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # click on 'login' button
-        self.driver.find_element_by_xpath('//*[@id="login"]')
+        self.driver.find_element_by_xpath('//*[@id="login"]').click()
         sleep(10)
         print(f'{self.driver.current_url}')
 
