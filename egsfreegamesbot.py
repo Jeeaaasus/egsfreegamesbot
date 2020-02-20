@@ -9,13 +9,9 @@ egs_password = environ['egs_password']
 
 class bot:
     def __init__(self):
-        options = webdriver.ChromeOptions()
+        options = webdriver.FirefoxOptions()
         options.add_argument('--headless')
-        options.add_argument('--whitelisted-ips')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-extensions')
-        options.add_argument('--disable-dev-shm-usage')
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Firefox(options=options)
 
     def main(self):
         self.startup()
@@ -59,7 +55,7 @@ class bot:
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # click on 'login' button
-        self.driver.find_element_by_xpath('/html/body/div/div/div/div/div/div[2]/div/form/div[4]/button/span').click()
+        self.driver.find_element_by_xpath('//*[@id="login"]').click()
         sleep(10)
 
     def login_check(self):
