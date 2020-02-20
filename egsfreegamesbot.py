@@ -47,6 +47,7 @@ class bot:
         # go to the store page
         self.driver.get('https://www.epicgames.com/store/en-US')
         sleep(10)
+        print(f'{self.driver.current_url}')
         # click on 'sign in' button
         self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span').click()
         sleep(10)
@@ -55,18 +56,18 @@ class bot:
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # click on 'login' button
-        self.driver.find_element_by_xpath('//*[@id="login"]').click()
+        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath('//*[@id="login"]'))
         sleep(10)
-
+        print(f'{self.driver.current_url}')
+        
     def login_check(self):
-        try:
-            self.driver.find_element_by_xpath("//*[text()='Sorry the credentials you are using are invalid.']")
+        if self.driver.current_url is 'https://www.epicgames.com/store/en-US':
+            print(f'Login success.')
+        else:
             print(f'Error: login failed.')
             print(f'Exiting!')
             self.driver.close()
             quit()
-        except NoSuchElementException:
-            print(f'Login success.')
 
     def find_free_games(self):
         print(f'Finding free games..')
