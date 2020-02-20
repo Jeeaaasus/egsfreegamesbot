@@ -105,10 +105,10 @@ class bot:
 
     def claim_game(self):
         # click on 'Get'
-        self.driver.find_element_by_xpath("//*[text()='Get']").click()
+        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
         sleep(10)
         # click on 'Place Order'
-        self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
+        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Place Order']"))
 
     def page_load(self):
         if self.page_load_test() is False:
