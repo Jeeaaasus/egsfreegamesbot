@@ -45,23 +45,20 @@ class bot:
     def login(self):
         print(f'Logging in..')
         # go to the store page
-        self.driver.get('https://www.epicgames.com/store/en-US')
+        self.driver.get('https://www.epicgames.com/id/login')
         sleep(10)
         print(f'{self.driver.current_url}')
-        # click on 'sign in' button
-        self.driver.find_element_by_xpath('//*[@id="user"]/ul/li/a/span').click()
-        sleep(10)
         # write email/username
         self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # click on 'login' button
-        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath('//*[@id="login"]'))
+        self.driver.find_element_by_xpath('//*[@id="login"]')
         sleep(10)
         print(f'{self.driver.current_url}')
-        
+
     def login_check(self):
-        if self.driver.current_url is 'https://www.epicgames.com/store/en-US':
+        if self.driver.current_url != 'https://www.epicgames.com/id/login':
             print(f'Login success.')
         else:
             print(f'Error: login failed.')
