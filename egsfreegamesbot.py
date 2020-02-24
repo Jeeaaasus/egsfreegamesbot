@@ -15,7 +15,7 @@ class bot:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
-        options.add_argument('log-level=1').
+        options.add_argument('log-level=1')
         self.driver = webdriver.Chrome(options=options)
 
     def main(self):
