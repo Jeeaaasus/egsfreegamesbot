@@ -15,6 +15,10 @@ class bot:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
+        options.add_argument('--whitelisted-ips')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--disable-dev-shm-usage')
         options.add_argument('log-level=1')
         self.driver = webdriver.Chrome(options=options)
 
