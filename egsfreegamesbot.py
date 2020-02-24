@@ -15,6 +15,7 @@ class bot:
 
     def main(self):
         self.startup()
+        self.driver.maximize_window()
         self.goto_free_games_page()
         self.page_load()
         self.login()
