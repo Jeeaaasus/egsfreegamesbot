@@ -13,13 +13,13 @@ egs_password = environ['egs_password']
 
 class bot:
     def __init__(self):
-        options = webdriver.FirefoxOptions()
+        options = webdriver.ChromeOptions()
         options.add_argument('--headless')
-        self.driver = webdriver.Firefox(options=options)
+        options.add_argument('log-level=1').
+        self.driver = webdriver.Chrome(options=options)
 
     def main(self):
         self.startup()
-        self.driver.maximize_window()
         self.goto_free_games_page()
         self.page_load()
         self.login()
@@ -51,24 +51,23 @@ class bot:
         print(f'Logging in..')
         # go to the store page
         self.driver.get('https://www.epicgames.com/id/login')
-       # sleep(10)
-        print(f'{self.driver.current_url}')
+        sleep(10)
         # write email/username
         self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
-        # click on 'login' button
-       # self.driver.find_element_by_xpath('//*[@id="login"]').click()
+        # wait for and click on 'login' button
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
         button.click()
-       # sleep(10)
-        print(f'{self.driver.current_url}')
 
     def login_check(self):
-        if self.driver.current_url != 'https://www.epicgames.com/id/login':
+        sleep(10)
+        if self.driver.current_url == 'https://www.epicgames.com/account/personal':
             print(f'Login success.')
         else:
             print(f'Error: login failed.')
+            print(f'Expected: https://www.epicgames.com/account/personal')
+            print(f'Got: {self.driver.current_url}')
             print(f'Exiting!')
             self.driver.close()
             quit()
