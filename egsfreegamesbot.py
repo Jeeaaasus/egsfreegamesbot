@@ -2,6 +2,10 @@ from os import environ
 from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.expected_conditions import presence_of_element_located as available
+from selenium.webdriver.common.by import By
+
 
 egs_username = environ['egs_username']
 egs_password = environ['egs_password']
@@ -54,7 +58,9 @@ class bot:
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # click on 'login' button
-        self.driver.find_element_by_xpath('//*[@id="login"]').click()
+       # self.driver.find_element_by_xpath('//*[@id="login"]').click()
+        button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
+        button.click()
         sleep(10)
         print(f'{self.driver.current_url}')
 
