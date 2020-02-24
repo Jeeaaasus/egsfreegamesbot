@@ -51,7 +51,7 @@ class bot:
         print(f'Logging in..')
         # go to the store page
         self.driver.get('https://www.epicgames.com/id/login')
-        sleep(10)
+       # sleep(10)
         print(f'{self.driver.current_url}')
         # write email/username
         self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
@@ -61,7 +61,7 @@ class bot:
        # self.driver.find_element_by_xpath('//*[@id="login"]').click()
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
         button.click()
-        sleep(10)
+       # sleep(10)
         print(f'{self.driver.current_url}')
 
     def login_check(self):
