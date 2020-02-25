@@ -111,11 +111,13 @@ class bot:
 
     def claim_game(self):
         # click on 'Get'
-        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
+       # self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
+        self.driver.find_element_by_xpath("//*[text()='Get']").click()
         sleep(10)
         if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
-        self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Place Order']"))
+       # self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Place Order']"))
+        self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
         sleep(10)
         if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
 
