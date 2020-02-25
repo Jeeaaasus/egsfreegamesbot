@@ -7,6 +7,7 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 from selenium.webdriver.common.by import By
 
 
+egs_debug = environ['egs_debug']
 egs_username = environ['egs_username']
 egs_password = environ['egs_password']
 
@@ -104,15 +105,17 @@ class bot:
                     # handle mature warning popup
                     except Exception:
                         self.close_popup_maturewarning()
-                        sleep(10)
             self.goto_free_games_page()
 
     def claim_game(self):
         # click on 'Get'
         self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
         sleep(10)
+        if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
         self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Place Order']"))
+        sleep(10)
+        if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
 
     def page_load(self):
         if self.page_load_test() is False:
@@ -139,13 +142,17 @@ class bot:
         # go to the 'free games' page
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
         sleep(10)
+        if egs_debug: print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def close_popup_cookies(self):
         self.driver.find_element_by_xpath("//*[text()='Close']").click()
+        if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
         self.driver.find_element_by_xpath("//*[text()='Continue']").click()
+        sleep(10)
+        if egs_debug: print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
 
 start = bot()
