@@ -1,5 +1,4 @@
 from os import environ
-from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
@@ -125,7 +124,7 @@ class bot:
         if self.page_load_test() is False:
             print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
             print(f'Trying again in an hour..')
-            sleep(60 * 60)
+            self.driver.implicitly_wait(3600)
             if self.page_load_test() is False:
                 print(f'You are probably being rate limited or Epic Games could be experiencing issues.')
                 print(f'Exiting!')
