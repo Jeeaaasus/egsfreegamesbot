@@ -56,7 +56,7 @@ class bot:
         print(f'Logging in..')
         # go to the store page
         self.driver.get('https://www.epicgames.com/id/login')
-        sleep(10)
+        self.driver.implicitly_wait(10)
         if egs_debug: print(f'DEBUG:login @ {self.driver.current_url}')
         # write email/username
         self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
@@ -65,9 +65,9 @@ class bot:
         # wait for and click on 'login' button
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
         button.click()
+        self.driver.implicitly_wait(10)
 
     def login_check(self):
-        sleep(10)
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
             print(f'Login success.')
             if egs_debug: print(f'DEBUG:login_check @ {self.driver.current_url}')
@@ -88,21 +88,21 @@ class bot:
         for n in range(free_now_buttons):
             # click button
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
-            sleep(10)
+            self.driver.implicitly_wait(10)
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
                 try:
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
                     print(f'#{1 + n}: You already own this game.')
-                    sleep(10)
+                    self.driver.implicitly_wait(10)
                     break
                 except NoSuchElementException:
                     # get the free game
                     try:
                         self.claim_game()
                         print(f'#{1 + n}: Claimed!')
-                        sleep(10)
+                        self.driver.implicitly_wait(10)
                         break
                     # handle mature warning popup
                     except Exception:
@@ -113,12 +113,12 @@ class bot:
         # click on 'Get'
        # self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
         self.driver.find_element_by_xpath("//*[text()='Get']").click()
-        sleep(10)
+        self.driver.implicitly_wait(10)
         if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
-       # self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
-        self.driver.find_element_by_xpath("/html/body/div[3]/div/div/div[4]/div/div[4]/div[1]/div[2]/div[5]/div/div").click()
-        sleep(10)
+       # self.driver.find_element_by_xpath("/html/body/div[3]/div/div/div[4]/div/div[4]/div[1]/div[2]/div[5]/div/div").click()
+        self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
+        self.driver.implicitly_wait(10)
         if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
 
     def page_load(self):
@@ -145,7 +145,7 @@ class bot:
     def goto_free_games_page(self):
         # go to the 'free games' page
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
-        sleep(10)
+        self.driver.implicitly_wait(10)
         if egs_debug: print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def close_popup_cookies(self):
@@ -155,7 +155,7 @@ class bot:
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
         self.driver.find_element_by_xpath("//*[text()='Continue']").click()
-        sleep(10)
+        self.driver.implicitly_wait(10)
         if egs_debug: print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
 
