@@ -116,8 +116,8 @@ class bot:
         sleep(10)
         if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
-       # self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Place Order']"))
-        self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
+       # self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
+        self.driver.find_element_by_xpath("/html/body/div[3]/div/div/div[4]/div/div[4]/div[1]/div[2]/div[5]/div/div").click()
         sleep(10)
         if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
 
