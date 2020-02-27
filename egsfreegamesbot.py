@@ -66,11 +66,13 @@ class bot:
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="usernameOrEmail"]'))).send_keys(egs_username)
        # self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
         # write password
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
+       # self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # wait for and click on 'login' button
-        button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
-        button.click()
-       # sleep(10)
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]'))).click()
+       # button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
+       # button.click()
+        sleep(10)
 
     def login_check(self):
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
