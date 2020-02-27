@@ -87,22 +87,22 @@ class bot:
         # for each button
         for n in range(free_now_buttons):
             # click button
-            self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
-            sleep(10)
+           # self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
+           # sleep(10)
+            button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
+            button.click()
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
                 try:
                     self.driver.find_element_by_xpath("//*[text()='Owned']")
                     print(f'#{1 + n}: You already own this game.')
-                    sleep(10)
                     break
                 except NoSuchElementException:
                     # get the free game
                     try:
                         self.claim_game()
                         print(f'#{1 + n}: Claimed!')
-                        sleep(10)
                         break
                     # handle mature warning popup
                     except Exception:
@@ -111,20 +111,26 @@ class bot:
 
     def claim_game(self):
         # click on 'Get'
-       # self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath("//*[text()='Get']"))
-        self.driver.find_element_by_xpath("//*[text()='Get']").click()
-        sleep(10)
+       # self.driver.find_element_by_xpath("//*[text()='Get']").click()
+       # sleep(10)
+        button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Get"]')))
+        button.click()
         if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
-        self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
-        sleep(10)
+       # self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
+       # sleep(10)
+        button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Place Order"]')))
+        button.click()
         if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
         try:
-            self.driver.find_element_by_xpath("//*[text()='I Agree']").click()
-            sleep(10)
+           # self.driver.find_element_by_xpath("//*[text()='I Agree']").click()
+           # sleep(10)
+            button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="I Agree"]')))
+            button.click()
+            if egs_debug: print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
         except NoSuchElementException:
             pass
-        if egs_debug: print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
+        if egs_debug: print(f'DEBUG:claim_game End @ {self.driver.current_url}')
 
     def page_load(self):
         if self.page_load_test() is False:
