@@ -89,8 +89,8 @@ class bot:
     def find_free_games(self):
         print(f'Looking for free games..')
         # get number of 'Free Now' buttons
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="Free Now"]')))
-        free_now_buttons = len(self.driver.find_elements_by_xpath("//*[text()='Free Now']"))
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
+        free_now_buttons = len(self.driver.find_elements_by_xpath('//*[text()="Free Now"]'))
         print(f'Found \'{free_now_buttons}\' free game(s).')
         # for each button
         for n in range(free_now_buttons):
