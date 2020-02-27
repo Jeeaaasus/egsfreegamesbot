@@ -10,6 +10,11 @@ egs_debug = environ['egs_debug']
 egs_username = environ['egs_username']
 egs_password = environ['egs_password']
 
+if egs_debug.upper() == 'TRUE':
+    egs_debug = True
+else:
+    egs_debug = False
+
 
 class bot:
     def __init__(self):
@@ -157,7 +162,7 @@ class bot:
         # go to the 'free games' page
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
        # sleep(10)
-        if egs_debug: print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def close_popup_cookies(self):
         self.driver.find_element_by_xpath("//*[text()='Close']").click()
