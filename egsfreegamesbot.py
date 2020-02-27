@@ -6,7 +6,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located as available
 from selenium.webdriver.common.by import By
 
-
 egs_debug = environ['egs_debug']
 egs_username = environ['egs_username']
 egs_password = environ['egs_password']
