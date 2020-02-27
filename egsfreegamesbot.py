@@ -61,20 +61,21 @@ class bot:
         # go to the store page
         self.driver.get('https://www.epicgames.com/id/login')
        # sleep(10)
-        if egs_debug: print(f'DEBUG:login @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:login @ {self.driver.current_url}')
         # write email/username
-        self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="usernameOrEmail"]'))).send_keys(egs_username)
+       # self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
         # write password
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(egs_password)
         # wait for and click on 'login' button
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
         button.click()
-        sleep(10)
+       # sleep(10)
 
     def login_check(self):
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
             print(f'Login success.')
-            if egs_debug: print(f'DEBUG:login_check @ {self.driver.current_url}')
+            if egs_debug: sleep(10); print(f'DEBUG:login_check @ {self.driver.current_url}')
         else:
             print(f'Error: login failed.')
             print(f'Expected: https://www.epicgames.com/account/personal')
