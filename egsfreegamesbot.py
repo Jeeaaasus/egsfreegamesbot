@@ -115,22 +115,22 @@ class bot:
        # sleep(10)
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Get"]')))
         button.click()
-        if egs_debug: print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
        # self.driver.find_element_by_xpath("//*[text()='Place Order']").click()
        # sleep(10)
         button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Place Order"]')))
         button.click()
-        if egs_debug: print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
         try:
            # self.driver.find_element_by_xpath("//*[text()='I Agree']").click()
            # sleep(10)
             button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="I Agree"]')))
             button.click()
-            if egs_debug: print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
+            if egs_debug: sleep(10); print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
         except NoSuchElementException:
             pass
-        if egs_debug: print(f'DEBUG:claim_game End @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:claim_game End @ {self.driver.current_url}')
 
     def page_load(self):
         if self.page_load_test() is False:
@@ -156,7 +156,7 @@ class bot:
     def goto_free_games_page(self):
         # go to the 'free games' page
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
-        sleep(10)
+       # sleep(10)
         if egs_debug: print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def close_popup_cookies(self):
@@ -166,7 +166,7 @@ class bot:
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
         self.driver.find_element_by_xpath("//*[text()='Continue']").click()
-        if egs_debug: print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
+        if egs_debug: sleep(10); print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
 
 start = bot()
