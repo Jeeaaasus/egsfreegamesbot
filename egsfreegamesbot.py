@@ -91,6 +91,7 @@ class bot:
            # sleep(10)
             button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
             button.click()
+            sleep(10)
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
@@ -166,7 +167,6 @@ class bot:
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
         self.driver.find_element_by_xpath("//*[text()='Continue']").click()
-        sleep(10)
         if egs_debug: print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
 
