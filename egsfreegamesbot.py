@@ -93,7 +93,7 @@ class bot:
             # click button
             WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
-            sleep(10)
+           # sleep(10)
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 try:
