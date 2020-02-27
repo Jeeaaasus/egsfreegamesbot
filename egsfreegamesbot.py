@@ -60,7 +60,7 @@ class bot:
         print(f'Logging in..')
         # go to the store page
         self.driver.get('https://www.epicgames.com/id/login')
-        sleep(10)
+       # sleep(10)
         if egs_debug: print(f'DEBUG:login @ {self.driver.current_url}')
         # write email/username
         self.driver.find_element_by_xpath('//*[@id="usernameOrEmail"]').send_keys(egs_username)
