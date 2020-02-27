@@ -72,12 +72,12 @@ class bot:
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]'))).click()
        # button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]')))
        # button.click()
-        sleep(10)
 
     def login_check(self):
+        sleep(10)
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
             print(f'Login success.')
-            if egs_debug: sleep(10); print(f'DEBUG:login_check @ {self.driver.current_url}')
+            if egs_debug: print(f'DEBUG:login_check @ {self.driver.current_url}')
         else:
             print(f'Error: login failed.')
             print(f'Expected: https://www.epicgames.com/account/personal')
@@ -87,8 +87,9 @@ class bot:
             quit()
 
     def find_free_games(self):
-        print(f'Finding free games..')
+        print(f'Looking for free games..')
         # get number of 'Free Now' buttons
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="Free Now"]')))
         free_now_buttons = len(self.driver.find_elements_by_xpath("//*[text()='Free Now']"))
         print(f'Found \'{free_now_buttons}\' free game(s).')
         # for each button
@@ -96,14 +97,14 @@ class bot:
             # click button
            # self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
            # sleep(10)
-            button = WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
-            button.click()
-            sleep(10)
+            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]'))).click()
+           # sleep(10)
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 # make sure the game isn't already owned
                 try:
-                    self.driver.find_element_by_xpath("//*[text()='Owned']")
+                    WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Owned"]')))
+                   # self.driver.find_element_by_xpath("//*[text()='Owned']")
                     print(f'#{1 + n}: You already own this game.')
                     break
                 except NoSuchElementException:
