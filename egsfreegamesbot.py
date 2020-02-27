@@ -36,7 +36,6 @@ class bot:
         self.goto_free_games_page()
         self.close_popup_cookies()
         self.find_free_games()
-
         print(f'All done!')
         self.quit()
 
@@ -53,7 +52,7 @@ class bot:
             self.driver.close()
             quit()
         print(f'Login: \'{egs_username}\'')
-        print(f'...')
+        print(f'')
 
     def login(self):
         print(f'Logging in..')
@@ -82,24 +81,21 @@ class bot:
         print(f'Looking for free games..')
         # get number of 'Free Now' buttons
         try:
-            WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Free Now"]')))
+            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
         except TimeoutException:
             print(f'No free games found.')
             self.quit()
         free_now_buttons = len(self.driver.find_elements_by_xpath('//*[text()="Free Now"]'))
         print(f'Found \'{free_now_buttons}\' free game(s).')
-        # for each button
         for n in range(free_now_buttons):
             # click button
             WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
-           # sleep(10)
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 try:
                     # make sure the game isn't already owned
                     WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Owned"]')))
-                    # self.driver.find_element_by_xpath("//*[text()='Owned']")
                     print(f'#{1 + n}: You already own this game.')
                     break
                 except TimeoutException:
@@ -121,11 +117,16 @@ class bot:
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Place Order"]'))).click()
         if egs_debug: sleep(10); print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
         try:
-            WebDriverWait(self.driver, 2).until(available((By.XPATH, '//*[text()="I Agree"]'))).click()
+            WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="I Agree"]'))).click()
             if egs_debug: sleep(10); print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
         except Exception:
             pass
         if egs_debug: sleep(10); print(f'DEBUG:claim_game End @ {self.driver.current_url}')
+
+    def goto_free_games_page(self):
+        # go to the 'free games' page
+        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
+        if egs_debug: sleep(10); print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def page_load(self):
         if self.page_load_test() is False:
@@ -139,7 +140,6 @@ class bot:
     def page_load_test(self):
         # make sure page loads correctly
         try:
-           # self.driver.find_element_by_xpath("//*[text()='Uh oh, something went wrong.']")
             WebDriverWait(self.driver, 2).until(available((By.XPATH, '//*[text()="Uh oh, something went wrong."]')))
             return False
         except TimeoutException:
@@ -147,21 +147,14 @@ class bot:
         except Exception:
             return False
 
-    def goto_free_games_page(self):
-        # go to the 'free games' page
-        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
-        if egs_debug: sleep(10); print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
-
     def close_popup_cookies(self):
         # close the cookies popup
         WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Close"]'))).click()
-       # self.driver.find_element_by_xpath("//*[text()='Close']").click()
         if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
         WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Continue"]'))).click()
-       # self.driver.find_element_by_xpath("//*[text()='Continue']").click()
         if egs_debug: sleep(10); print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
     def quit(self):
