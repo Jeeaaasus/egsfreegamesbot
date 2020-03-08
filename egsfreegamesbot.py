@@ -160,6 +160,7 @@ class bot:
 
     def quit(self):
         print(f'Exiting!')
+        sleep(2)
         self.driver.close()
         quit()
 
