@@ -67,8 +67,11 @@ class bot:
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]'))).click()
 
     def login_check(self):
-        sleep(10)
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Store"]')))
+        sleep(2)
+        try:
+            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Store"]')))
+        except TimeoutException:
+            pass
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
             print(f'Login success.')
             if egs_debug: print(f'DEBUG:login_check @ {self.driver.current_url}')
