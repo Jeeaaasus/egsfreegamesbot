@@ -65,9 +65,9 @@ class bot:
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # click on 'login' button
         WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]'))).click()
+        sleep(10)
 
     def login_check(self):
-        sleep(2)
         try:
             WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Store"]')))
         except TimeoutException:
@@ -125,6 +125,7 @@ class bot:
             if egs_debug: sleep(10); print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
         except Exception:
             pass
+        sleep(10)
         if egs_debug: sleep(10); print(f'DEBUG:claim_game End @ {self.driver.current_url}')
 
     def goto_free_games_page(self):
