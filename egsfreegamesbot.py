@@ -60,16 +60,16 @@ class bot:
         self.driver.get('https://www.epicgames.com/id/login')
         if egs_debug: sleep(10); print(f'DEBUG:login @ {self.driver.current_url}')
         # write email
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="usernameOrEmail"]'))).send_keys(egs_username)
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="usernameOrEmail"]'))).send_keys(egs_username)
         # write password
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # click on 'login' button
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id="login"]'))).click()
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="login"]'))).click()
         sleep(10)
 
     def login_check(self):
         try:
-            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Store"]')))
+            WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Store"]')))
         except TimeoutException:
             pass
         if self.driver.current_url == 'https://www.epicgames.com/account/personal':
@@ -85,7 +85,7 @@ class bot:
         print(f'Looking for free games..')
         # get number of 'Free Now' buttons
         try:
-            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
+            WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Free Now"]')))
         except TimeoutException:
             print(f'No free games found.')
             self.quit()
@@ -93,13 +93,13 @@ class bot:
         print(f'Found \'{free_now_buttons}\' free game(s).')
         for n in range(free_now_buttons):
             # click button
-            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Free Now"]')))
+            WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Free Now"]')))
             self.driver.find_elements_by_xpath("//*[text()='Free Now']")[n].click()
             print(f'#{1 + n}: {self.driver.current_url}')
             while True:
                 try:
                     # make sure the game isn't already owned
-                    WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Owned"]')))
+                    WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Owned"]')))
                     print(f'#{1 + n}: You already own this game.')
                     break
                 except TimeoutException:
@@ -115,13 +115,13 @@ class bot:
 
     def claim_game(self):
         # click on 'Get'
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Get"]'))).click()
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Get"]'))).click()
         if egs_debug: sleep(10); print(f'DEBUG:claim_game Get @ {self.driver.current_url}')
         # click on 'Place Order'
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Place Order"]'))).click()
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Place Order"]'))).click()
         if egs_debug: sleep(10); print(f'DEBUG:claim_game Place Order @ {self.driver.current_url}')
         try:
-            WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="I Agree"]'))).click()
+            WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="I Agree"]'))).click()
             if egs_debug: sleep(10); print(f'DEBUG:claim_game I Agree @ {self.driver.current_url}')
         except Exception:
             pass
@@ -145,7 +145,7 @@ class bot:
     def page_load_test(self):
         # make sure page loads correctly
         try:
-            WebDriverWait(self.driver, 2).until(available((By.XPATH, '//*[text()="Uh oh, something went wrong."]')))
+            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Uh oh, something went wrong."]')))
             return False
         except TimeoutException:
             return True
@@ -154,12 +154,12 @@ class bot:
 
     def close_popup_cookies(self):
         # close the cookies popup
-        WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Close"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Close"]'))).click()
         if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
-        WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Continue"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Continue"]'))).click()
         if egs_debug: sleep(10); print(f'DEBUG:close_popup_maturewarning @ {self.driver.current_url}')
 
     def quit(self):
