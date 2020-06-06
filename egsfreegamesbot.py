@@ -62,7 +62,7 @@ class bot:
         # Login with Epic account
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Sign in with Epic Games"]')))
         # write email
-        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="usernameOrEmail"]'))).send_keys(egs_username)
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="email"]'))).send_keys(egs_username)
         # write password
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # click on 'login' button
