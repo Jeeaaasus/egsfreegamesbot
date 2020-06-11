@@ -61,10 +61,10 @@ class bot:
         if egs_debug: sleep(10); print(f'DEBUG:login @ {self.driver.current_url}')
         # Login with Epic account
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Sign in with Epic Games"]')))
-        # write email
-        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="email"]'))).send_keys(egs_username)
         # write password
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
+        # write email
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="email"]'))).send_keys(egs_username)
         # click on 'login' button
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="login"]'))).click()
         sleep(10)
