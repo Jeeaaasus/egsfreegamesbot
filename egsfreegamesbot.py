@@ -60,8 +60,7 @@ class bot:
         self.driver.get('https://www.epicgames.com/id/login')
         if egs_debug: sleep(10); print(f'DEBUG:login @ {self.driver.current_url}')
         # Login with Epic account
-        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Sign in with Epic Games"]')))
-        if egs_debug: sleep(10); print(f'DEBUG:screenshot login1 @ {self.driver.current_url}'); self.driver.save_screenshot("debug_login1.png")
+        WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Sign in with Epic Games"]'))).click()
         # write email
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="email"]'))).send_keys(egs_username)
         # write password
