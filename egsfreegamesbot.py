@@ -34,7 +34,7 @@ class bot:
         self.login()
         self.login_check()
         self.goto_free_games_page()
-        self.close_popup_cookies()
+       # self.close_popup_cookies()
         self.find_free_games()
         print(f'All done!')
         self.quit()
