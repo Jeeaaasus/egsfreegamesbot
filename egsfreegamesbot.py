@@ -34,7 +34,7 @@ class bot:
         self.login()
         self.login_check()
         self.goto_free_games_page()
-       # self.close_popup_cookies()
+        self.close_popup_cookies()
         self.find_free_games()
         print(f'All done!')
         self.quit()
@@ -156,7 +156,7 @@ class bot:
 
     def close_popup_cookies(self):
         # close the cookies popup
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Close"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
         if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
