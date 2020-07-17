@@ -133,6 +133,8 @@ class bot:
 
     def goto_free_games_page(self):
         # go to the 'free games' page
+        self.driver.get('https://www.epicgames.com')
+        sleep(10)
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
         if egs_debug: sleep(10); print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
@@ -148,7 +150,7 @@ class bot:
     def page_load_test(self):
         # make sure page loads correctly
         try:
-            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Uh oh, something went wrong."]')))
+            WebDriverWait(self.driver, 10).until(available((By.XPATH, '//*[text()="Uh oh, something went wrong."]')))
             return False
         except TimeoutException:
             return True
@@ -157,7 +159,8 @@ class bot:
 
     def close_popup_cookies(self):
         # close the cookies popup
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Close"]'))).click()
+       # WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[class()="onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button onetrust-lg ot-close-icon"]'))).click()
         if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
