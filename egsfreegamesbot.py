@@ -158,12 +158,10 @@ class bot:
             return False
 
     def close_popup_cookies(self):
-        # close the cookies popup
-        try:
-            WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
-            if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
-        except:
-            pass
+        # close the cookies
+       # WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id()="popup onetrust-accept-btn-handler"]'))).click()
+        if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
         # click 'continue' on mature warning
