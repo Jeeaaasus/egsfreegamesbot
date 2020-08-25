@@ -10,10 +10,10 @@ egs_debug = environ['egs_debug']
 egs_username = environ['egs_username']
 egs_password = environ['egs_password']
 
-if egs_debug.upper() == 'TRUE':
-    egs_debug = True
-else:
+if egs_debug.upper() == 'FALSE':
     egs_debug = False
+else:
+    egs_debug = True
 
 
 class bot:
@@ -159,8 +159,8 @@ class bot:
 
     def close_popup_cookies(self):
         # close the cookies
-       # WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
-        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id()="popup onetrust-accept-btn-handler"]'))).click()
+        WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[text()="Accept All Cookies"]'))).click()
+       # WebDriverWait(self.driver, 60).until(available((By.XPATH, '//*[@id()="popup onetrust-accept-btn-handler"]'))).click()
         if egs_debug: print(f'DEBUG:close_popup_cookies @ {self.driver.current_url}')
 
     def close_popup_maturewarning(self):
