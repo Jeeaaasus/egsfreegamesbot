@@ -1,3 +1,5 @@
+# self.driver.save_screenshot("debug.png")
+
 from os import environ
 from time import sleep
 from selenium import webdriver
@@ -59,6 +61,7 @@ class bot:
         # go to the login page
         self.driver.get('https://www.epicgames.com/id/login')
         if egs_debug: sleep(10); print(f'DEBUG:login @ {self.driver.current_url}')
+        if egs_debug: print(f'DEBUG:screenshot login1 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login1.png")
         # Login with Epic account
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="Sign in with Epic Games"]'))).click()
         # write email
@@ -67,6 +70,7 @@ class bot:
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # click on 'login' button
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="login"]'))).click()
+        if egs_debug: sleep(10); print(f'DEBUG:screenshot login2 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login2.png")
         sleep(10)
 
     def login_check(self):
