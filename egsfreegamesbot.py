@@ -140,7 +140,11 @@ class bot:
         self.driver.get('https://www.epicgames.com')
         sleep(120)
         self.driver.get('https://www.epicgames.com/store/en-US/free-games')
-        sleep(120)
+        sleep(10)
+        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
+        sleep(10)
+        self.driver.get('https://www.epicgames.com/store/en-US/free-games')
+        sleep(10)
         if egs_debug: sleep(10); print(f'DEBUG:goto_free_games_page @ {self.driver.current_url}')
 
     def page_load(self):
