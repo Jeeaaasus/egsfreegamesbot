@@ -67,9 +67,9 @@ class bot:
         # try to beat the captcha
         try:
             WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="VERIFY"]'))).click()
-            if egs_debug: print(f'DEBUG:screenshot login3 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login3.png")
+            if egs_debug: print(f'DEBUG:screenshot login2 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login3.png")
         except:
-            if egs_debug: print(f'DEBUG:screenshot login4 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login4.png")
+            if egs_debug: print(f'DEBUG:screenshot login3 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login4.png")
             pass
         # write email
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="email"]'))).send_keys(egs_username)
@@ -77,7 +77,14 @@ class bot:
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="password"]'))).send_keys(egs_password)
         # click on 'login' button
         WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[@id="login"]'))).click()
-        if egs_debug: sleep(10); print(f'DEBUG:screenshot login5 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login5.png")
+        # try to beat the captcha
+        try:
+            WebDriverWait(self.driver, 300).until(available((By.XPATH, '//*[text()="VERIFY"]'))).click()
+            if egs_debug: print(f'DEBUG:screenshot login4 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login3.png")
+        except:
+            if egs_debug: print(f'DEBUG:screenshot login5 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login4.png")
+            pass
+        if egs_debug: sleep(10); print(f'DEBUG:screenshot login6 @ {self.driver.current_url}'); self.driver.save_screenshot("/debug/debug_login5.png")
         sleep(10)
 
     def login_check(self):
